@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Nettolicious.Tickets.Configuration;
+using Nettolicious.Tickets.Contracts;
 using Newtonsoft.Json;
 
 namespace Nettolicious.Tickets.API {
@@ -38,7 +39,11 @@ namespace Nettolicious.Tickets.API {
     }
 
     public void ConfigureContainer(ContainerBuilder builder) {
-      builder.RegisterModule(new ConfigurationModule());
+      var settings = new Dictionary<string, string>
+      {
+        { Constants.Persistence.TICKETS_DB_CONNECTION, Configuration[Constants.Persistence.TICKETS_DB_CONNECTION] }
+      };
+      builder.RegisterModule(new ConfigurationModule(settings));
     }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
