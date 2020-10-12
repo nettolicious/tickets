@@ -1,0 +1,13 @@
+﻿{{> imports}}
+
+namespace Nettolicious.Tickets.Contracts.Persistence.Entities
+{
+{{#if class-annotation}}
+{{{class-annotation}}}
+{{/if}}
+    public partial class {{class}}
+    {
+{{{> constructor}}}
+{{{> properties}}}
+    }
+}
